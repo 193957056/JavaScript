@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <p>创建和使用对象方法。</p>
+    <p>对象方法是一个函数定义,并作为一个属性值存储。</p>
+    <p id="demo1"></p>
+    <p id="demo2"></p>
+    <p id="demo3"></p>
+    <p id="demo4"></p>
+</body>
+<script>
+    var person = {
+        firstName: "Yama",
+        lastName: "yama",
+        id: 5566,
+        fullName: function() {
+            return this.firstName + " " + this.lastName;
+        }
+    };
+
+    document.getElementById("demo1").innerHTML = "不加括号输出函数表达式：" + person.fullName;
+    document.getElementById("demo2").innerHTML = "加括号输出函数执行结果：" + person.fullName();
+    document.getElementById("demo3").innerHTML = "访问对象属性方法一" + person.firstName;
+    document.getElementById("demo4").innerHTML = "访问对象属性方法二" + person['firstName'];
+</script>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>局部变量在声明的函数外不可以访问。</p>
+    <p id="demo"></p>
+    <p>全局变量在任何脚本和函数内均可访问。</p>
+    <p id="demo1"></p>
+    <p>
+        如果你的变量没有声明，它将自动成为全局变量：
+    </p>
+    <p id="demo2"></p>
+    <script>
+        myFunction();
+        document.getElementById('demo').innerHTML = "carName 的类型是：" + typeof carName;
+
+        function myFunction() {
+            var carName = 'yama';
+        }
+
+        var carName1 = 'yama';
+        myFunction1();
+
+        function myFunction1() {
+            document.getElementById('demo1').innerHTML = '我可以显示' + carName1;
+        }
+        myFunction2();
+        document.getElementById("demo2").innerHTML =
+            "我可以显示 " + carName;
+
+        function myFunction2() {
+            carName = "yama2";
+        }
+    </script>
+</body>
+
+</html>

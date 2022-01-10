@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>点击这个按钮，来调带参数的函数</p>
+    <button onclick="myFunction('yama','做饭')">点我</button>
+    <p>带返回参数的函数：</p>
+    <p id="demo1"></p>
+    <script>
+        function myFunction(name, job) {
+            alert(name + job);
+        }
+
+        function myFunction1(a, b) {
+            return a * b;
+
+        }
+        document.getElementById('demo1').innerHTML = myFunction1(2, 6);
+    </script>
+</body>
+
+</html>
