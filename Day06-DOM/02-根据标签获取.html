@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>yama</li>
+        <li>yama</li>
+        <li>yama</li>
+        <li>yama</li>
+        <li>yama</li>
+    </ul>
+    <ul id="nav">
+        <li>sdfhoashdfo</li>
+        <li>sdfhoashdfo</li>
+        <li>sdfhoashdfo</li>
+        <li>sdfhoashdfo</li>
+        <li>sdfhoashdfo</li>
+    </ul>
+    <script>
+        var lis = document.getElementsByTagName('li');
+        console.log(lis);
+        console.log(lis[0]);
+        for (var i = 0; i < lis.length; i++) {
+            console.log(lis[i]);
+        }
+        var nav = document.getElementById('nav');
+        var navLis = nav.getElementsByTagName('li');
+        console.log(navLis);
+    </script>
+</body>
+
+</html>
