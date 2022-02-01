@@ -1,0 +1,100 @@
+/* 清楚元素默认的内外边距 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* 让所有斜体不倾斜 */
+
+em,
+i {
+    font-style: normal;
+}
+
+
+/* 去掉列表前面的小点 */
+
+li {
+    list-style: none;
+}
+
+
+/* 图片没有边框 去掉图片底侧的空白缝隙 */
+
+img {
+    border: 0;
+    vertical-align: middle;
+}
+
+
+/* 让button按钮 变成小手 */
+
+button {
+    cursor: pointer;
+}
+
+
+/* 取消链接的下划线 */
+
+a {
+    color: #666;
+    text-decoration: none;
+}
+
+
+/* a:hover {
+    color: #e33333;
+}
+
+h4 {
+    font-weight: 400;
+} */
+
+body {
+    background: url(../images/bg.jpg) no-repeat 0 0 / cover;
+    /* background-size: cover; */
+}
+
+.viewport {
+    display: flex;
+    min-width: 1024px;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 1.1rem .25rem 0;
+    background: url(../images/logo.png) no-repeat 0 0/contain;
+    min-height: 780px;
+}
+
+.viewport .column {
+    flex: 3;
+    background-color: transparent;
+}
+
+.viewport .column:nth-child(2) {
+    flex: 4;
+}
+
+
+/* 公共面板样式 */
+
+.panel {
+    position: relative;
+    border: 15px solid transparent;
+    border-width: .6375rem .475rem .25rem 1.65rem;
+    border-image: url(../images/border.png);
+    border-image-slice: 51 38 20 132;
+    margin-bottom: .25rem;
+}
+
+.inner {
+    position: absolute;
+    top: -0.6375rem;
+    left: -1.65rem;
+    right: -0.475rem;
+    bottom: -0.25rem;
+    padding: .3rem .45rem;
+    background-color: transparent;
+}

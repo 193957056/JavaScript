@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>选择EChart图表</title>
+    <style>
+        .box {
+            width: 700px;
+            height: 700px;
+            background-color: pink;
+        }
+    </style>
+    <script src="js/echarts.min.js"></script>
+</head>
+
+<body>
+
+    <div class="box"></div>
+    <script>
+        var myChart = echarts.init(document.querySelector('.box'));
+        var option = {
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                top: '5%',
+                left: 'center'
+            },
+            series: [{
+                name: 'Access From',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '40',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [{
+                    value: 1048,
+                    name: 'Search Engine'
+                }, {
+                    value: 735,
+                    name: 'Direct'
+                }, {
+                    value: 580,
+                    name: 'Email'
+                }, {
+                    value: 484,
+                    name: 'Union Ads'
+                }, {
+                    value: 300,
+                    name: 'Video Ads'
+                }]
+            }]
+        };
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>
