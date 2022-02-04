@@ -19,6 +19,7 @@
     <!-- 父容器大盒子 -->
     <div class="viewport">
         <div class="column">
+            <!-- 概览区域模块制作 -->
             <div class="panel overview">
                 <div class="inner">
                     <ul>
@@ -49,6 +50,7 @@
                     </ul>
                 </div>
             </div>
+            <!-- 监控区域模块制作 -->
             <div class="monitor panel">
                 <div class="inner">
                     <div class="tabs">
@@ -199,8 +201,68 @@
                     </div>
                 </div>
             </div>
+            <!-- 点位区域模块制作 -->
+            <div class="point panel">
+                <div class="inner">
+                    <h3>点位分布统计</h3>
+                    <div class="chart">
+                        <div class="pie"></div>
+                        <div class="data">
+                            <div class="item">
+                                <h4>320,11</h4>
+                                <span>
+                          <i class="icon-dot" style="color: #ed3f35"></i>
+                          点位总数
+                        </span>
+                            </div>
+                            <div class="item">
+                                <h4>418</h4>
+                                <span>
+                          <i class="icon-dot" style="color: #eacf19"></i>
+                          本月新增
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="column">2</div>
+        <div class="column">
+            <!-- 地图区域模块制作 -->
+            <div class="map">
+                <h3>
+                    <span class="icon-cube"></span> 设备数据统计
+                </h3>
+                <div class="chart">
+                    <div class="geo"></div>
+                </div>
+            </div>
+            <!-- 用户统计 -->
+            <div class="users panel">
+                <div class="inner">
+                    <h3>全国用户总量统计</h3>
+                    <div class="chart">
+                        <div class="bar"></div>
+                        <div class="data">
+                            <div class="item">
+                                <h4>120,899</h4>
+                                <span>
+                                    <i class="icon-dot" style="color: #ed3f35;"></i>
+                                    用户总量
+                                </span>
+                            </div>
+                            <div class="item">
+                                <h4>248</h4>
+                                <span>
+                                    <i class="icon-dot" style="color: #ed3f35;"></i>
+                                    本月新增
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="column">3</div>
     </div>
     <script src="js/index.js"></script>
