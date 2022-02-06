@@ -333,7 +333,7 @@ body {
 .users .bar {
     width: 7.35rem;
     height: 3rem;
-    background-color: pink;
+    background-color: transparent;
 }
 
 .users .data {

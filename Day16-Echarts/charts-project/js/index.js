@@ -62,7 +62,25 @@
 })();
 // 柱形图模块
 (function() {
-    // 1.实例化对象
+    var item = {
+            name: '',
+            value: 1200,
+            // 修改当前柱形的样式
+            itemStyle: {
+                color: '#254065'
+            },
+            // 鼠标放到柱子上不想高亮显示
+            emphasis: {
+                itemStyle: {
+                    color: "#254065"
+                }
+            },
+            tooltip: {
+                extraCssText: "opacity:0"
+            }
+
+        }
+        // 1.实例化对象
     var myChart = echarts.init(document.querySelector('.bar'));
     // 2.指定配置项和数据
     var option = {
@@ -114,7 +132,8 @@
             // 使用类目，必须有data属性
             type: 'category',
             // 使用 data 中的数据设为刻度文字
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            // series
+            data: ["上海", "广州", "北京", "深圳", "合肥", "", "……", "杭州", "厦门", "济南", "成都", "重庆"],
             // 刻度设置
             axisTick: {
                 // true意思：图形和刻度居中中间
@@ -140,13 +159,21 @@
         // 控制y轴
         yAxis: [{
             // 使用类目，必须有data属性
-            type: 'value'
+            type: 'value',
+            axisLabel: {
+                color: '#4c9bfd'
+            },
+            splitLine: {
+                lineStyle: {
+                    color: 'rgba(0, 240, 255, 0.3)'
+                }
+            },
         }],
         series: [{
             name: 'Direct',
             type: 'bar',
             barWidth: '60%',
-            data: [10, 52, 200, 334, 390, 330, 220]
+            data: [2100, 1900, 1700, 1560, 1400, item, item, item, 900, 750, 600, 480, 240]
         }]
     };
     // 3.把配置给实例对象
