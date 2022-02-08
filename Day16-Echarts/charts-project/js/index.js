@@ -183,37 +183,38 @@
     })
 })();
 // 订单功能
-// (function() {
-//     // 1. 准备数据
-//     var data = {
-//             day365: { orders: '20,301,987', amount: '99834' },
-//             day90: { orders: '301,987', amount: '9834' },
-//             day30: { orders: '1,987', amount: '3834' },
-//             day1: { orders: '987', amount: '834' }
-//         }
-//         // 获取显示 订单数量 容器
-//     var $h4Orders = $('.order h4:eq(0)')
-//         // 获取显示 金额数量 容器
-//     var $h4Amount = $('.order h4:eq(1)')
-//     $('.order').on('click', '.filter a', function() {
-//             // 2. 点击切换激活样式
-//             $(this).addClass('active').siblings().removeClass('active')
-//                 // 3. 点击切换数据
-//             var currdata = data[this.dataset.key]
-//             $h4Orders.html(currdata.orders)
-//             $h4Amount.html(currdata.amount)
-//         })
-//         // 4. 开启定时器切换数据
-//     var index = 0
-//     var $allTab = $('.order .filter a')
-//     setInterval(function() {
-//         index++
-//         if (index >= 4) index = 0
-//         $allTab.eq(index).click()
-//     }, 5000)
-// })();
+(function() {
+    // 1. 准备数据
+    var data = {
+            day365: { orders: '20,301,987', amount: '99834' },
+            day90: { orders: '301,987', amount: '9834' },
+            day30: { orders: '1,987', amount: '3834' },
+            day1: { orders: '987', amount: '834' }
+        }
+        // 获取显示 订单数量 容器
+    var $h4Orders = $('.order h4:eq(0)')
+        // 获取显示 金额数量 容器
+    var $h4Amount = $('.order h4:eq(1)')
+    $('.order').on('click', '.filter a', function() {
+            // 2. 点击切换激活样式
+            $(this).addClass('active').siblings().removeClass('active')
+                // 3. 点击切换数据
+            var currdata = data[this.dataset.key]
+            $h4Orders.html(currdata.orders);
+            $h4Amount.html(currdata.amount);
+        })
+        // 4. 开启定时器切换数据
+    var index = 0
+    var $allTab = $('.order .filter a')
+    setInterval(function() {
+        index++
+        if (index >= 4) index = 0
+        $allTab.eq(index).click()
+    }, 5000)
+})();
 // 销售统计模块
 (function() {
+    // (1)准备数据
     var data = {
             year: [
                 [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
@@ -237,6 +238,7 @@
     // 2. 指定配置和数据
     var option = {
         tooltip: {
+            // 通过坐标轴来触发
             trigger: "axis"
         },
         legend: {
@@ -289,18 +291,79 @@
         },
         series: [{
             name: '预期销售额',
-            data: [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
+            data: data.year[0],
             type: 'line',
             // 折线修饰为圆滑
             smooth: true,
+            itemStyle: {
+                color: '#00f2f1'
+            },
+            data: data.year[0]
         }, {
             name: '实际销售额',
-            data: [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79],
+            data: data.year[0],
             type: 'line',
             smooth: true,
+            itemStyle: {
+                color: '#ed3f35'
+            },
+            data: data.year[1]
         }]
     };
 
     // 3. 把配置和数据给实例对象
     myChart.setOption(option);
+    // 4.tab切换小伙制作
+
+    //(2)切换
+    $('.sales .caption').on('click', 'a', function() {
+            index = $(this).index() - 1;
+            //点击当前a 高亮显示 调用active
+            $(this).addClass('active').siblings('a').removeClass('active');
+
+            // currData 当前对应的数据  
+            // this.dataset.type 标签上的data-type属性值，对应data中的属性
+            // console.log(this.dataset.type);
+            // console.log(data.year);
+            // console.log(data["year"]);
+            // console.log(data[this.dataset.type]);
+            var arr = data[this.dataset.type];
+            //修改图标1的数据
+            // 根据拿到的数据重新渲染 series里面的data值
+            option.series[0].data = arr[0];
+            //修改图标2的数据
+            option.series[1].data = arr[1];
+            //重新把配置好的新数据给实例对象
+            myChart.setOption(option);
+        })
+        // 5.tab栏自动切换效果
+        // 开启定时器每隔3s,自动让a触发点击事件即可
+    var as = $(".sales .caption a");
+    var index = 0;
+    var timer = setInterval(function() {
+        index++;
+        if (index >= 4) {
+            index = 0;
+        }
+        as.eq(index).click();
+    }, 1000);
+    // 鼠标经过sales,关闭定时器,离开开启定时器
+    $(".sales").hover(
+        function() {
+            clearInterval(timer);
+
+        },
+        function() {
+            clearInterval(timer);
+            timer = setInterval(function() {
+                index++;
+                if (index >= 4) {
+                    index = 0;
+                }
+                as.eq(index).click();
+            }, 1000);
+        })
+    window.addEventListener("resize", function() {
+        myChart.resize();
+    })
 })();
