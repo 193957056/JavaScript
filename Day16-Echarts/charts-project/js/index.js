@@ -186,10 +186,10 @@
 (function() {
     // 1. 准备数据
     var data = {
-            day365: { orders: '20,301,987', amount: '99834' },
-            day90: { orders: '301,987', amount: '9834' },
-            day30: { orders: '1,987', amount: '3834' },
-            day1: { orders: '987', amount: '834' }
+            day365: ['20,301,987', '99834'],
+            day90: ['301,987', '9834'],
+            day30: ['1,987', '3834'],
+            day1: ['987', '834']
         }
         // 获取显示 订单数量 容器
     var $h4Orders = $('.order h4:eq(0)')
@@ -199,9 +199,13 @@
             // 2. 点击切换激活样式
             $(this).addClass('active').siblings().removeClass('active')
                 // 3. 点击切换数据
-            var currdata = data[this.dataset.key]
-            $h4Orders.html(currdata.orders);
-            $h4Amount.html(currdata.amount);
+                // console.log(data[this.dataset.type]);
+            var arr = data[this.dataset.type];
+            // console.log(arr[0]);
+            // console.log(arr[1]);
+            // var currdata = data[this.dataset.key]
+            $h4Orders.html(arr[0]);
+            $h4Amount.html(arr[1]);
         })
         // 4. 开启定时器切换数据
     var index = 0
@@ -367,3 +371,264 @@
         myChart.resize();
     })
 })();
+
+// 销售渠道模块 雷达图
+(function() {
+    // 1. 实例化对象
+    var myChart = echarts.init(document.querySelector(".radar"));
+    // 2.指定配置
+
+    var option = {
+        tooltip: {
+            show: true,
+            // 控制提示框组件的显示位置
+            position: ["60%", "10%"]
+        },
+        radar: {
+            // 雷达图的指示器 内部填充数据
+            indicator: [
+                { name: "机场", max: 100 },
+                { name: "商场", max: 100 },
+                { name: "火车站", max: 100 },
+                { name: "汽车站", max: 100 },
+                { name: "地铁", max: 100 }
+            ],
+            // 修改雷达图的大小
+            radius: "65%",
+            center: ['50%', '50%'],
+            shape: "circle",
+            // 分割的圆圈个数
+            splitNumber: 4,
+            name: {
+                // 修饰雷达图文字的颜色
+                textStyle: {
+                    color: "#4c9bfd"
+                }
+            },
+            // 坐标轴在 grid 区域中的分隔线（圆圈）
+            splitLine: {
+                lineStyle: {
+                    color: "rgba(255,255,255, 0.5)"
+                }
+            },
+            splitArea: {
+                show: false
+            },
+            // 坐标轴的线修改为白色半透明 坐标轴轴线相关设置(竖线)axisLine
+            axisLine: {
+                lineStyle: {
+                    color: "rgba(255, 255, 255, 0.5)"
+                }
+            }
+        },
+        series: [{
+            name: "北京",
+            type: "radar",
+            // 填充区域的线条颜色
+            lineStyle: {
+                normal: {
+                    color: "#fff",
+                    width: 1,
+                    opacity: 0.5
+                }
+            },
+            data: [
+                [90, 19, 56, 11, 34]
+            ],
+            // 设置图形标记 （拐点）
+            symbol: "circle",
+            // 这个是设置小圆点大小
+            symbolSize: 5,
+            // 设置小圆点颜色
+            itemStyle: {
+                color: "#fff"
+            },
+            // 让小圆点显示数据
+            label: {
+                show: true,
+                fontSize: 10
+            },
+            // 修饰我们区域填充的背景颜色
+            areaStyle: {
+                color: "rgba(238, 197, 102, 0.6)"
+            }
+        }]
+    };
+    // 3.把配置和数据给对象
+    myChart.setOption(option);
+    // 当我们浏览器缩放的时候，图表也等比例缩放
+    window.addEventListener("resize", function() {
+        // 让我们的图表调用 resize这个方法
+        myChart.resize();
+    });
+})();
+// 销售模块 饼形图 半圆形 设置方式
+(function() {
+    var myChart = echarts.init(document.querySelector('.gauge'));
+    var option = {
+        series: [{
+            name: "销售进度",
+            type: "pie",
+            radius: ["130%", "150%"],
+            //是否启用防止标签重叠策略
+            // avoidLabelOverlap: false,
+            // 移动下位置  套住50%文字
+            center: ['48%', '80%'],
+            label: {
+                normal: {
+                    show: false
+                }
+            },
+            //起始角度，支持范围0-360
+            startAngle: 180,
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            hoveroffset: 0,
+            data: [{
+                    value: 100,
+                    itemStyle: {
+                        // 颜色渐变#00c9e0->#005fc1
+                        color: new echarts.graphic.LinearGradient(
+                            // (x1,y2) 点到点 (x2,y2) 之间进行渐变
+                            0,
+                            0,
+                            0,
+                            1, [
+                                { offset: 0, color: "#00c9e0" }, // 0 起始颜色
+                                { offset: 1, color: "#005fc1" } // 1 结束颜色
+                            ]
+                        )
+                    }
+                },
+                { value: 100, itemStyle: { color: '#12274d' } }, // 颜色#12274d
+                { value: 200, itemStyle: { color: 'transparent' } } // 透明隐藏第三块区域
+            ],
+
+        }]
+    };
+    myChart.setOption(option);
+})();
+// 全国热榜
+(function() {
+    var hotData = [{
+            city: '北京', // 城市
+            sales: '25, 179', // 销售额
+            flag: true, //  上升还是下降
+            brands: [ //  品牌种类数据
+                { name: '可爱多', num: '9,086', flag: true },
+                { name: '娃哈哈', num: '8,341', flag: true },
+                { name: '喜之郎', num: '7,407', flag: false },
+                { name: '八喜', num: '6,080', flag: false },
+                { name: '小洋人', num: '6,724', flag: false },
+                { name: '好多鱼', num: '2,170', flag: true },
+            ]
+        },
+        {
+            city: '河北',
+            sales: '23,252',
+            flag: false,
+            brands: [
+                { name: '可爱多', num: '3,457', flag: false },
+                { name: '娃哈哈', num: '2,124', flag: true },
+                { name: '喜之郎', num: '8,907', flag: false },
+                { name: '八喜', num: '6,080', flag: true },
+                { name: '小洋人', num: '1,724', flag: false },
+                { name: '好多鱼', num: '1,170', flag: false },
+            ]
+        },
+        {
+            city: '上海',
+            sales: '20,760',
+            flag: true,
+            brands: [
+                { name: '可爱多', num: '2,345', flag: true },
+                { name: '娃哈哈', num: '7,109', flag: true },
+                { name: '喜之郎', num: '3,701', flag: false },
+                { name: '八喜', num: '6,080', flag: false },
+                { name: '小洋人', num: '2,724', flag: false },
+                { name: '好多鱼', num: '2,998', flag: true },
+            ]
+        },
+        {
+            city: '江苏',
+            sales: '23,252',
+            flag: false,
+            brands: [
+                { name: '可爱多', num: '2,156', flag: false },
+                { name: '娃哈哈', num: '2,456', flag: true },
+                { name: '喜之郎', num: '9,737', flag: true },
+                { name: '八喜', num: '2,080', flag: true },
+                { name: '小洋人', num: '8,724', flag: true },
+                { name: '好多鱼', num: '1,770', flag: false },
+            ]
+        },
+        {
+            city: '山东',
+            sales: '20,760',
+            flag: true,
+            brands: [
+                { name: '可爱多', num: '9,567', flag: true },
+                { name: '娃哈哈', num: '2,345', flag: false },
+                { name: '喜之郎', num: '9,037', flag: false },
+                { name: '八喜', num: '1,080', flag: true },
+                { name: '小洋人', num: '4,724', flag: false },
+                { name: '好多鱼', num: '9,999', flag: true },
+            ]
+        }
+    ];
+    //2.根据数据渲染各省热销sup模块内容
+    var supHTML = "";
+    // （1）.遍历hotData对象
+    $.each(hotData, function(index, item) {
+        // console.log(item.city);
+        supHTML += `<li>
+        <span>${item.city}</span>
+        <span>${item.sales} <s class=${item.flag?"icon-up" : "icon-down"}></s></span>
+    </li>`;
+    });
+    $('.sup').html(supHTML);
+    // 3.当鼠标进入tab的时候 会高亮
+    $('.province .sup').on("mouseenter", "li", function() {
+        index = $(this).index();
+        render($(this));
+    });
+    // 声明一个函数 里面设置sup当前小li高亮还有 对应的品牌对象渲染
+    function render(that) {
+        that.addClass('active').siblings().removeClass();
+        var subHTML = "";
+        $.each(hotData[that.index()].brands, function(index, item) {
+            subHTML += `<li>
+            <span>${item.name}</span>
+            <span>${item.num} <s class=${item.flag?"icon-up" : "icon-down"}></s></span>
+        </li>`;
+        });
+        $('.sub').html(subHTML);
+    }
+    // 4.默认把第一个小li处于鼠标经过状态
+    var lis = $('.province .sup li');
+    lis.eq(0).mouseenter();
+    //5.开启定时器
+    var index = 0;
+    var timer = setInterval(function() {
+        index++;
+        render(lis.eq(index));
+    }, 1000);
+    $(".province .sup").hover(function() {
+        // 鼠标经过事件
+        clearInterval(timer);
+    }, function() {
+        // 鼠标离开事件
+        clearInterval(timer);
+        timer = setInterval(function() {
+            index++;
+            if (index >= 5) {
+                index = 0;
+            }
+            render(lis.eq(index));
+        }, 1000);
+    })
+
+})()
